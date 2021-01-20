@@ -1,24 +1,22 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './App.scss';
+
+import Header from './components/Header';
+import PlanBox from './components/PlanBox';
+import CourseBox from './components/CourseBox';
+import SelectBox from './components/SelectBox';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header/>
+      <div className='interface'>
+        <PlanBox/>
+        <div className="right-container">
+          <CourseBox/>
+          <SelectBox/>
+        </div>
+      </div>
     </div>
   );
 }

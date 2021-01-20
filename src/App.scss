@@ -1,0 +1,30 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+}
+
+.App {
+    height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr; // header auto interface remaining
+}
+
+.interface {   
+    text-align: justify;
+    justify-content: space-evenly;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    .PlanBox {
+        flex: 3;
+        // border-style: solid;
+    }
+    .right-container {
+        justify-content: space-between;
+        flex: 1;
+        flex-direction: column;
+        display: flex;
+        // border-style: solid;
+        background-color: aquamarine;
+    }
+}
