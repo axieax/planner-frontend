@@ -4,27 +4,27 @@
     font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
 }
 
-.App {
-    height: 100vh;
+/* window consists of header and interface */
+.window {
+    // position
+    margin: 70px;
+    height: calc(100vh - 140px);
+    width: calc(100vw - 140px);
+    // layout
     display: grid;
     grid-template-rows: auto 1fr; // header auto interface remaining
+    // style
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(4px);
+    border: solid 2px transparent;
+    border-radius: 20px;
 }
 
+/* interface consists of PlanBox and CourseBox */
 .interface {   
     text-align: justify;
-    justify-content: space-evenly;
     display: grid;
-    grid-template-columns: 3fr 1fr;
-    .PlanBox {
-        flex: 3;
-        // border-style: solid;
-    }
-    .right-container {
-        justify-content: space-between;
-        flex: 1;
-        flex-direction: column;
-        display: flex;
-        // border-style: solid;
-        background-color: aquamarine;
-    }
+    grid-template-columns: 3fr 1fr;    
 }

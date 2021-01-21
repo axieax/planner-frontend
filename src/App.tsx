@@ -4,17 +4,21 @@ import './App.scss';
 import Header from './components/Header';
 import PlanBox from './components/PlanBox';
 import CourseBox from './components/CourseBox';
-import SelectBox from './components/SelectBox';
+
+const BackgroundStyle = {
+  backgroundImage: 'url(/light-background.jpeg)', // change to custom 1920px
+  backgroundSize: 'cover',
+  // borderStyle: 'solid',
+}
 
 function App() {
   return (
-    <div className="App">
-      <Header/>
-      <div className='interface'>
-        <PlanBox/>
-        <div className="right-container">
+    <div className="App" style={BackgroundStyle}>
+      <div className="window">
+        <Header/>
+        <div className='interface'>
+          <PlanBox/>
           <CourseBox/>
-          <SelectBox/>
         </div>
       </div>
     </div>
@@ -22,3 +26,5 @@ function App() {
 }
 
 export default App;
+
+// NOTE: App background doesn't cover entire screen, sidebar still present
