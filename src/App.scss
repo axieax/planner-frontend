@@ -4,6 +4,12 @@
     font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
 }
 
+.App {
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+}
+
 /* window consists of header and interface */
 .window {
     // position

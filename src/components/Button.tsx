@@ -2,12 +2,13 @@ import React from 'react';
 import './Button.scss';
 
 interface ButtonProps {
+    onClick?: any,
     children?: string,
 }
 
 export default function Button(props: ButtonProps) {
     return (
-        <button>
+        <button onClick={props.onClick}>
             {props.children}
         </button>
     )

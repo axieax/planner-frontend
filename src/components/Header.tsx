@@ -2,7 +2,11 @@ import React from 'react';
 import './Header.scss';
 import Button from './Button';
 
-export default function Header() {
+interface HeaderProps {
+    nextTheme?: any,
+}
+
+export default function Header(props: HeaderProps) {
     return (
         <header>
             <h1>UNSW Degree Planner</h1>
@@ -10,7 +14,7 @@ export default function Header() {
                 <Button>About</Button>
                 <Button>Help</Button>
                 <Button>Feedback</Button>
-                <Button>Dark Mode</Button>
+                <Button onClick={props.nextTheme}>Change Theme</Button>
             </div>
         </header>
     )
