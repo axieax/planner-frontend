@@ -5,18 +5,17 @@ import Header from './components/Header';
 import PlanBox from './components/PlanBox';
 import CourseBox from './components/CourseBox';
 
-const themes = ['pink', 'purple', 'blue'];
+const themes = ['orange', 'purple', 'green', 'blue', 'sideways', 'dark'];
 const themeStyle = (themeIndex: number) => ({
-  backgroundImage: 'url(/' + themes[themeIndex] + '.png)',
-  backgroundSize: 'cover',
+  backgroundImage: 'url(/backgrounds/' + themes[themeIndex] + '.png)',
   backgroundRepeat: 'no-repeat',
+  backgroundSize: 'cover',
 });
 
 
-function App() {
-  const themes = ['pink', 'purple', 'blue'];
+export default function App() {
+  // change theme
   const [themeIndex, setThemeIndex] = useState(0);
-  
   const nextTheme = () => (setThemeIndex((themeIndex + 1) % themes.length));
 
   return (
@@ -31,7 +30,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
-
-// NOTE: App background doesn't cover entire screen, sidebar still present

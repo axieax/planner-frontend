@@ -10,12 +10,12 @@ export default function Header(props: HeaderProps) {
     return (
         <header>
             <h1>UNSW Degree Planner</h1>
-            <div className='right-container'>
+            <div className="rightContainer">
                 <Button>About</Button>
                 <Button>Help</Button>
                 <Button>Feedback</Button>
                 <Button onClick={props.nextTheme}>Change Theme</Button>
             </div>
         </header>
-    )
+    );
 }

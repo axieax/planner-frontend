@@ -1,10 +1,13 @@
 button {
     // position
     margin: 0px 12px;
-    padding: 8px 10px;
+    padding: 8px 12px;
     // style
-    border-radius: 12px;
-    background-color: rgba(0, 0, 0, 0);
-    border-color: white;
     color: black;
+    background-color: rgba(0, 0, 0, 0);
+    border: solid 1px transparent;
+    border-radius: 12px;
+    box-shadow: 0 1px 4px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(4px);
 }

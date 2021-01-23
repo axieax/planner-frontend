@@ -4,33 +4,53 @@
     font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
 }
 
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: rgba(235, 235, 235, 0.8);
+    border-radius: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(199, 198, 198, 0.9);
+    border-radius: 12px;
+}
+
 .App {
+    position: absolute;
     height: 100vh;
     width: 100vw;
-    position: absolute;
 }
 
 /* window consists of header and interface */
 .window {
     // position
-    margin: 70px;
-    height: calc(100vh - 140px);
-    width: calc(100vw - 140px);
+    position: relative;
+    top: 60px;
+    left: 80px;
+    height: calc(100% - 120px);
+    width: calc(100% - 160px);
+    box-sizing: border-box;
     // layout
-    display: grid;
-    grid-template-rows: auto 1fr; // header auto interface remaining
+    display: flex;
+    flex-direction: column;
     // style
-    background-color: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-    backdrop-filter: blur(40px);
-    -webkit-backdrop-filter: blur(4px);
+    background-color: rgba(255, 255, 255, 0.25);
     border: solid 2px transparent;
     border-radius: 20px;
+    box-shadow: 0 8px 32px 0 rgba(83, 88, 167, 0.37);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(4px);
 }
 
 /* interface consists of PlanBox and CourseBox */
-.interface {   
-    text-align: justify;
+.interface {
+    // position
+    height: inherit;
+    flex: 1 1 auto;
+    // layout
     display: grid;
-    grid-template-columns: 3fr 1fr;    
+    grid-template-columns: 3fr 1fr;
 }

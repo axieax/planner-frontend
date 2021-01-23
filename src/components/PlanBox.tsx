@@ -4,7 +4,7 @@ import './PlanBox.scss';
 
 export default function PlanBox() {
     return (
-        <div className='PlanBox'>
+        <div className="PlanBox">
             <div className="strip">
                 <h2>My Plan</h2>
                 <div className="actions">
@@ -12,6 +12,9 @@ export default function PlanBox() {
                     <Button>Auto Place</Button>
                 </div>
             </div>
+            <div className="content">
+                test
+            </div>
         </div>
-    )
+    );
 }
