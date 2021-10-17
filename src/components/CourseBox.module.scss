@@ -1,0 +1,38 @@
+.courseBox {
+  // position
+  padding: 20px;
+  // layout
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  // style
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 0px 0px 20px 0px;
+  overflow: hidden;
+  .strip {
+    margin-bottom: 10px;
+    .stripSecondary {
+      // NOTE: doesn't work
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+  }
+  .content {
+    overflow: auto;
+    // scrollbar
+  }
+  .buttonContainer {
+    text-align: center;
+    button {
+      // position
+      margin: 0;
+      padding: 10px 20px;
+      // style
+      vertical-align: middle; // doesn't work
+      font-size: 21px;
+      background-color: rgba(255, 230, 0, 0.5);
+      box-shadow: 0 2px 12px 0 rgba(31, 38, 135, 0.37);
+      border-radius: 15px;
+    }
+  }
+}

@@ -1,70 +1,38 @@
-import React, { useState } from 'react';
-import './CourseBox.scss';
-import Button from './Button';
+import React, { useState } from "react";
+import styles from "./CourseBox.module.scss";
+import Button from "./Button";
 
-export default function CourseBox() {
-    const [showUnplaced, setShowUnplaced] = useState(true);
-    return (
-        <div className='CourseBox'>
-            <div className="strip">
-                <h2>My Courses</h2>
-                <div className="strip-secondary">
-                    <h3>Displaying all courses</h3>
-                    Switch
-                </div>
-            </div>
-            <div className="content">
-                <ul>
-                    <li>|| Course 1</li>
-                    <li>Course 1</li>
-                    <li>Course 1</li>
-                    <li>Course 1</li>
-                    <li>Course 1</li>
-                    <li>Course 1</li>
-                    <li>Course 1</li>
-                    <li>Course 1</li>
-                    <li>Course 1</li>
-                    <li>Course 1</li>
-                    <li>Course 1</li>
-                    <li>Course 1</li>
-                    <li>Course 1</li>
-                    <li>Course 1</li>
-                    <li>Course 1</li>
-                    <li>Course 1</li>
-                    <li>Course 1</li>
-                    <li>Course 1</li>
-                    <li>Course 1</li>
-                    <li>Course 1</li>
-                    <li>Course 1</li>
-                    <li>Course 1</li>
-                    <li>Course 1</li>
-                    <li>Course 1</li>
-                    <li>Course 1</li>
-                    <li>Course 1</li>
-                    <li>Course 1</li>
-                    <li>Course 1</li>
-                    <li>Course 1</li>
-                    <li>Course 1</li>
-                    <li>Course 1</li>
-                    <li>Course 1</li>
-                    <li>Course 1</li>
-                    <li>Course 1</li>
-                    <li>Course 1</li>
-                    <li>Course 1</li>
-                    <li>Course 1</li>
-                    <li>Course 1</li>
-                    <li>Course 1</li>
-                    <li>Course 1</li>
-                    <li>Course 1</li>
-                    <li>Course 1</li>
-                    <li>Course 1</li>
-                    <li>Course 1</li>
-                    <li>Course 1</li>
-                </ul>
-            </div>
-            <div className="buttonContainer">
-                <Button>Add a course</Button>
-            </div>
-        </div>
-    );
+interface courseBoxProps {
+  selectedCourses: string[];
+  setShowSelect: React.Dispatch<React.SetStateAction<boolean>>;
 }
+
+const CourseBox: React.FC<courseBoxProps> = ({
+  selectedCourses,
+  setShowSelect,
+}) => {
+  const [showUnplaced, setShowUnplaced] = useState(true);
+  return (
+    <div className={styles.courseBox}>
+      <div className={styles.strip}>
+        <h2>My Courses</h2>
+        <div className={styles.stripSecondary}>
+          <h3>Displaying all courses</h3>
+          Switch
+        </div>
+      </div>
+      <div className={styles.content}>
+        <ul>
+          {selectedCourses.map((code) => (
+            <li key={code}>{code}</li>
+          ))}
+        </ul>
+      </div>
+      <div className={styles.buttonContainer}>
+        <Button onClick={() => setShowSelect(true)}>Add a course</Button>
+      </div>
+    </div>
+  );
+};
+
+export default CourseBox;

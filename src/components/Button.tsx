@@ -1,15 +1,15 @@
-import React from 'react';
-import './Button.scss';
+import React from "react";
+import styles from "./Button.module.scss";
 
 interface ButtonProps {
-    onClick?: any,
-    children?: string,
+  onClick?: any;
+  children?: string;
 }
 
-export default function Button(props: ButtonProps) {
-    return (
-        <button onClick={props.onClick}>
-            {props.children}
-        </button>
-    );
+export default function Button({ onClick, children }: ButtonProps) {
+  return (
+    <button className={styles.button} onClick={onClick}>
+      {children}
+    </button>
+  );
 }
