@@ -1,6 +1,6 @@
+import Button from "@mui/material/Button/Button";
 import React from "react";
 import styles from "./Header.module.scss";
-import Button from "./Button";
 
 interface HeaderProps {
   nextTheme?: any;

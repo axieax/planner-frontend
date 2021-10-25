@@ -1,22 +1,32 @@
-import React from "react";
+import { Input, Button } from "@mui/material";
+import Paper from "@mui/material/Paper/Paper";
+import React, { useState } from "react";
 import styles from "./CourseSelect.module.scss";
 
 interface courseSelectProps {
-  selectedCourses: string[];
-  setSelectedCourses: React.Dispatch<React.SetStateAction<string[]>>;
+  setSelectedCourses: React.Dispatch<React.SetStateAction<Array<string>>>;
   setShowSelect: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const CourseSelect: React.FC<courseSelectProps> = ({
-  selectedCourses,
   setSelectedCourses,
   setShowSelect,
 }) => {
+  const [input, setInput] = useState('');
   return (
-    <div className={styles.courseSelectContainer}>
-      popup
-      <button onClick={() => setShowSelect(false)}>X</button>
-    </div>
+    <Paper elevation={24} className={styles.courseSelectContainer}>
+      Add a course: 
+      <Input sx={{m: 1}} onChange={(e) => setInput(e.target.value)}/>
+
+      <Button variant="contained" onClick={()=> {
+        setSelectedCourses((prevCourses) => prevCourses.concat([input]));
+        setShowSelect(false);
+        }}>
+        add
+      </Button>
+
+      <Button onClick={() => setShowSelect(false)}>X</Button>
+    </Paper>
   );
 };
 

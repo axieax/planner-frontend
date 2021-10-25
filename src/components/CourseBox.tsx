@@ -1,29 +1,39 @@
+import Button from "@mui/material/Button/Button";
 import React, { useState } from "react";
+import { PlanType } from "../App";
 import styles from "./CourseBox.module.scss";
-import Button from "./Button";
 
 interface courseBoxProps {
   selectedCourses: string[];
   setShowSelect: React.Dispatch<React.SetStateAction<boolean>>;
+  planType: PlanType;
+}
+
+const inPlan = (course: string) => {
+  return true;
 }
 
 const CourseBox: React.FC<courseBoxProps> = ({
   selectedCourses,
   setShowSelect,
+  planType,
 }) => {
   const [showUnplaced, setShowUnplaced] = useState(true);
+  const coursesToShow = !showUnplaced ?  selectedCourses.filter(course => !inPlan(course)) : selectedCourses;
   return (
     <div className={styles.courseBox}>
       <div className={styles.strip}>
         <h2>My Courses</h2>
         <div className={styles.stripSecondary}>
-          <h3>Displaying all courses</h3>
-          Switch
+          <Button onClick={() => setShowUnplaced((prevUnplaced) => !prevUnplaced && true)}>
+          { showUnplaced ? "Displaying all courses" : "Showing unplaced Courses" }
+          </Button>
         </div>
       </div>
       <div className={styles.content}>
         <ul>
-          {selectedCourses.map((code) => (
+          {
+            coursesToShow.map((code) => (
             <li key={code}>{code}</li>
           ))}
         </ul>
