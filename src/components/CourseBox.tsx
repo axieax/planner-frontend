@@ -1,6 +1,6 @@
 import Button from "@mui/material/Button/Button";
 import React, { useState } from "react";
-import { PlanType, Offering } from "../App";
+import { Offering } from "../App";
 import styles from "./CourseBox.module.scss";
 
 interface courseBoxProps {

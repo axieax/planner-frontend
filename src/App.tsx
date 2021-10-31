@@ -21,7 +21,7 @@ export type Offering = {
   courses: Array<string>,
 }
 
-type OfferingTerm = {
+export type OfferingTerm = {
   year: number,
   term: number,
 }
@@ -43,16 +43,65 @@ export default function App() {
   const [plan, setPlan] = useState<Array<Offering>>([
     {
       year: 2020,
+      term: 0,
+      max_uoc: 0,
+      current_uoc: 0,
+      courses: [],
+    },
+    {
+      year: 2020,
       term: 1,
       max_uoc: 20,
       current_uoc: 6,
       courses: ['COMP1511'],
-    }
+    },
+    {
+      year: 2020,
+      term: 2,
+      max_uoc: 20,
+      current_uoc: 0,
+      courses: [],
+    },
+    {
+      year: 2020,
+      term: 3,
+      max_uoc: 20,
+      current_uoc: 0,
+      courses: [],
+    },
+    {
+      year: 2021,
+      term: 0,
+      max_uoc: 0,
+      current_uoc: 0,
+      courses: [],
+    },
+    {
+      year: 2021,
+      term: 1,
+      max_uoc: 20,
+      current_uoc: 6,
+      courses: [],
+    },
+    {
+      year: 2021,
+      term: 2,
+      max_uoc: 20,
+      current_uoc: 0,
+      courses: [],
+    },
+    {
+      year: 2021,
+      term: 3,
+      max_uoc: 20,
+      current_uoc: 0,
+      courses: [],
+    },
   ])
   const [planType, setPlanType] = useState<PlanType>(
   {
     start: {year : 2020, term: 1},
-    end: {year: 2022, term: 3},
+    end: {year: 2021, term: 3},
     num_terms: 4,
     program: "3789",
   });

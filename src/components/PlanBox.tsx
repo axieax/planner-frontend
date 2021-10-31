@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Offering, PlanType } from "../App";
 import OfferingGrid from "./OfferingGrid";
 import styles from "./PlanBox.module.scss";
@@ -18,8 +18,7 @@ interface planBoxProps {
 const PlanBox: React.FC<planBoxProps> = ({ 
   planType, setPlanType, selectedCourses, plan, themeIndex, setPlan
 }) => {
-  const [planDisplay, setPlanDisplay] = useState({...planType, courses: selectedCourses, plan: plan});
-  const submitPlan = async () => {
+    const submitPlan = async () => {
     const requestInit: RequestInit = {
       method: 'POST',
       headers: {
@@ -30,11 +29,6 @@ const PlanBox: React.FC<planBoxProps> = ({
     const newPlan = await fetch('http://localhost:6000/plan', requestInit).then((response) => response.json());
     setPlanType(newPlan);
   }
-  useEffect(() => {
-    setPlanDisplay({...planType, courses: selectedCourses, plan: plan});
-  });
-  const numYears = planDisplay.end.year - planDisplay.start.year + 1;
-  const numDisplayedTerms = planDisplay.num_terms * (numYears);
   return (
     <div className={styles.planBox}>
       <div className={styles.strip}>
@@ -48,15 +42,16 @@ const PlanBox: React.FC<planBoxProps> = ({
         <OfferingGrid
             plan={plan}
             setPlan={setPlan}
-            numTerms={numDisplayedTerms}
             themeIndex={themeIndex}
-            numYears={numYears}
+            planType={planType}
         />
       </div>
       <SettingsBox
         planType={planType}
         setPlanType={setPlanType}
         themeIndex={themeIndex}
+        plan={plan}
+        setPlan={setPlan}
       />
     </div>
   );

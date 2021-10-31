@@ -1,5 +1,5 @@
 import { Paper, Input } from "@mui/material";
-import { PlanType, themeStyle } from "../App";
+import { Offering, PlanType, themeStyle, OfferingTerm } from "../App";
 import styles from './SettingsBox.module.scss';
 
 
@@ -7,12 +7,37 @@ interface settingsBoxProps {
   planType: PlanType;
   setPlanType: React.Dispatch<React.SetStateAction<PlanType>>;
   themeIndex: number;
+  plan: Array<Offering>
+  setPlan: React.Dispatch<React.SetStateAction<Array<Offering>>>
 }
 
 
 const SettingsBox: React.FC<settingsBoxProps> = ({
-  planType, setPlanType, themeIndex
+  planType, setPlanType, themeIndex, plan, setPlan
 }) => {
+  
+  const getTermTuples = (beginning: OfferingTerm, end: OfferingTerm) => {
+    let yearTuples = [];
+    for (let year = beginning.year; year <= end.year; year++) {
+      for (let term = 0; term < planType.num_terms; term++) {
+        yearTuples.push([term, year]);
+      }
+    }
+    return yearTuples;
+  }
+
+  const fixPlan = (prevPlan: PlanType) => {
+    setPlan(() => {
+      const termTuples = getTermTuples(prevPlan.start, prevPlan.end);
+      return termTuples.map((item) => ({
+        term: item[0],
+        year: item[1],
+        current_uoc: 0,
+        max_uoc: item[0] === 0 ? 0 : 20,
+        courses: [],
+      }))
+    })
+  }
   return (
   <Paper
     style={themeStyle(themeIndex)}
@@ -46,6 +71,7 @@ const SettingsBox: React.FC<settingsBoxProps> = ({
           if (parseInt(values[1]) < 2018 || parseInt(values[1]) > prevPlan.end.year) return prevPlan; 
           prevPlan.start.term = parseInt(values[0]);
           prevPlan.start.year = parseInt(values[1]);
+          fixPlan(prevPlan);
           return prevPlan;
         })}
       />
@@ -59,6 +85,7 @@ const SettingsBox: React.FC<settingsBoxProps> = ({
             if (parseInt(values[1]) < 2018 || parseInt(values[1]) < prevPlan.start.year) return prevPlan; 
             prevPlan.end.term = parseInt(values[0]);
             prevPlan.end.year = parseInt(values[1]);
+            fixPlan(prevPlan);
             return prevPlan;
           })}
       />
