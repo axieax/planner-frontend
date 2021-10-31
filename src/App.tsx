@@ -7,13 +7,13 @@ import CourseBox from "./components/CourseBox";
 import CourseSelect from "./components/CourseSelect";
 
 const themes = ["orange", "purple", "green", "blue", "sideways", "dark"];
-const themeStyle = (themeIndex: number) => ({
+export const themeStyle = (themeIndex: number) => ({
   backgroundImage: "url(/backgrounds/" + themes[themeIndex] + ".png)",
   backgroundRepeat: "no-repeat",
   backgroundSize: "cover",
 });
 
-type Offering = {
+export type Offering = {
   year: number,
   term: number,
   max_uoc: number,
@@ -52,7 +52,7 @@ export default function App() {
   const [planType, setPlanType] = useState<PlanType>(
   {
     start: {year : 2020, term: 1},
-    end: {year: 2021, term: 3},
+    end: {year: 2022, term: 3},
     num_terms: 4,
     program: "3789",
   });
@@ -71,11 +71,18 @@ export default function App() {
               setShowSelect={setShowSelect}
             />
           )}
-          <PlanBox planType={planType} setPlanType={setPlanType} selectedCourses={selectedCourses} />
+          <PlanBox
+            planType={planType}
+            setPlanType={setPlanType}
+            selectedCourses={selectedCourses}
+            plan={plan}
+            setPlan={setPlan}
+            themeIndex={themeIndex}
+            />
           <CourseBox
             selectedCourses={selectedCourses}
             setShowSelect={setShowSelect}
-            planType={planType}
+            plan={plan}
           />
         </div>
       </div>

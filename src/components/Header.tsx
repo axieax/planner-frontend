@@ -1,5 +1,4 @@
 import Button from "@mui/material/Button/Button";
-import React from "react";
 import styles from "./Header.module.scss";
 
 interface HeaderProps {

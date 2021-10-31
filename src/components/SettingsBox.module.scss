@@ -1,0 +1,10 @@
+.settings {
+  padding: 15px;
+  bottom: 10px;
+  position: absolute;
+  display: grid;
+  width: 71%;
+  grid-template-columns: 1fr 1fr; 
+  grid-template-rows: 1fr 1fr; 
+  gap: 10px 10px;
+}
