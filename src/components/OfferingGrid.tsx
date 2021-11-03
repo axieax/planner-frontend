@@ -2,6 +2,7 @@ import { Offering, PlanType } from "../App";
 import OfferingBox from "./OfferingList";
 import styles from "./OfferingGrid.module.scss";
 import { Box } from "@mui/system";
+import { useEffect, useState } from "react";
 
 interface OfferingGridProps {
   plan: Array<Offering>;
@@ -14,7 +15,10 @@ interface OfferingGridProps {
 const OfferingGrid: React.FC<OfferingGridProps> = ({
   plan, setPlan, themeIndex, planType
 }) => {
-  const numDisplayedTerms = planType.num_terms * (planType.end.year - planType.start.year + 1);
+  const [numDisplayedTerms, setNumDisplayedTerms] = useState(planType.num_terms * (planType.end.year - planType.start.year + 1));
+  useEffect(() => 
+    setNumDisplayedTerms(planType.num_terms * (planType.end.year - planType.start.year + 1))
+  , [planType.num_terms, planType.end.year, planType.start.year]);
   return (
     <Box 
       sx={{
@@ -25,6 +29,7 @@ const OfferingGrid: React.FC<OfferingGridProps> = ({
     >
       {Array.from(Array(numDisplayedTerms).keys()).map((number) => (
         <OfferingBox
+          key={number}
           plan={plan}
           setPlan={setPlan}
           planIndex={number}

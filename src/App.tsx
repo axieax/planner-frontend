@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./App.scss";
+import { DragDropContext } from 'react-beautiful-dnd';
 
 import Header from "./components/Header";
 import PlanBox from "./components/PlanBox";
@@ -108,8 +109,13 @@ export default function App() {
   // Course selection menu
   const [showSelect, setShowSelect] = useState(false);
   const [selectedCourses, setSelectedCourses] = useState(['COMP1511']);
-
+  const onDragEnd = () => {
+    return;
+  }
   return (
+  <DragDropContext
+    onDragEnd={onDragEnd}
+  >
     <div className="App" style={themeStyle(themeIndex)}>
       <div className="window">
         <Header nextTheme={nextTheme} />
@@ -136,5 +142,6 @@ export default function App() {
         </div>
       </div>
     </div>
+  </DragDropContext>
   );
 }

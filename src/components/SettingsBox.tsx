@@ -27,29 +27,31 @@ const SettingsBox: React.FC<settingsBoxProps> = ({
   }
 
   const fixPlan = (prevPlan: PlanType) => {
-    setPlan(() => {
-      const termTuples = getTermTuples(prevPlan.start, prevPlan.end);
-      return termTuples.map((item) => ({
+    const termTuples = getTermTuples(prevPlan.start, prevPlan.end);
+    setPlan(termTuples.map((item) => ({
         term: item[0],
         year: item[1],
         current_uoc: 0,
         max_uoc: item[0] === 0 ? 0 : 20,
         courses: [],
-      }))
-    })
+      })))
   }
   return (
   <Paper
     style={themeStyle(themeIndex)}
     className={styles.settings}
   >
-
+    {/*may remove number of terms in a year - probably should just be a code change.*/}
     <div>
     number of terms in a year (include summer):<br />
     <Input defaultValue={4} onChange={(e) => 
       setPlanType((prevPlan) => {
-        prevPlan.num_terms = parseInt(e.target.value);
-        return prevPlan;
+        const newNumber = parseInt(e.target.value);
+        if (isNaN(newNumber)) return prevPlan; 
+        const plan = {...prevPlan};
+        plan.num_terms = parseInt(e.target.value);
+        fixPlan(plan);
+        return plan;
       })} />
     </div>
     <div>
@@ -57,36 +59,39 @@ const SettingsBox: React.FC<settingsBoxProps> = ({
       <Input defaultValue="3789"
         onChange={(e) =>
         setPlanType((prevPlan) => {
-          prevPlan.program = e.target.value;
-          return prevPlan;
+          const plan = {...prevPlan};
+          plan.program = e.target.value;
+          return plan;
         })}
       />
     </div>
     <div>
-      Starting Term (format: [term],[year]):<br/> 
+      Starting Term (format: [term],[year]):<br/>
       <Input defaultValue="1,2020"
         onChange={(e) =>
         setPlanType((prevPlan) => {
           const values = e.target.value.split(",");
-          if (parseInt(values[1]) < 2018 || parseInt(values[1]) > prevPlan.end.year) return prevPlan; 
-          prevPlan.start.term = parseInt(values[0]);
-          prevPlan.start.year = parseInt(values[1]);
-          fixPlan(prevPlan);
-          return prevPlan;
+          if (isNaN(parseInt(values[1])) || parseInt(values[1]) < 2018 || parseInt(values[1]) > prevPlan.end.year) return prevPlan; 
+          const plan = {...prevPlan};
+          plan.start.term = parseInt(values[0]);
+          plan.start.year = parseInt(values[1]);
+          fixPlan(plan);
+          return plan;
         })}
       />
     </div>
     <div>
       Ending Term (format: [term],[year]):<br/>
-      <Input defaultValue="3,2022"
+      <Input defaultValue="3,2021"
         onChange={(e) =>
           setPlanType((prevPlan) => {
             const values = e.target.value.split(",");
-            if (parseInt(values[1]) < 2018 || parseInt(values[1]) < prevPlan.start.year) return prevPlan; 
-            prevPlan.end.term = parseInt(values[0]);
-            prevPlan.end.year = parseInt(values[1]);
-            fixPlan(prevPlan);
-            return prevPlan;
+            if (isNaN(parseInt(values[1])) || parseInt(values[1]) < 2018 || parseInt(values[1]) < prevPlan.start.year) return prevPlan; 
+            const plan = {...prevPlan};
+            plan.end.term = parseInt(values[0]);
+            plan.end.year = parseInt(values[1]);
+            fixPlan(plan);
+            return plan;
           })}
       />
     </div>
