@@ -1,6 +1,5 @@
 import { useState } from "react";
 import "./App.scss";
-import { DragDropContext } from 'react-beautiful-dnd';
 
 import Header from "./components/Header";
 import PlanBox from "./components/PlanBox";
@@ -18,7 +17,6 @@ export type Offering = {
   year: number,
   term: number,
   max_uoc: number,
-  current_uoc: number,
   courses: Array<string>,
 }
 
@@ -39,63 +37,55 @@ export default function App() {
   // change theme
   const [themeIndex, setThemeIndex] = useState(0);
   const nextTheme = () => setThemeIndex((themeIndex + 1) % themes.length);
-  
+
   // Plan
   const [plan, setPlan] = useState<Array<Offering>>([
     {
       year: 2020,
       term: 0,
       max_uoc: 0,
-      current_uoc: 0,
       courses: [],
     },
     {
       year: 2020,
       term: 1,
       max_uoc: 20,
-      current_uoc: 6,
       courses: ['COMP1511'],
     },
     {
       year: 2020,
       term: 2,
       max_uoc: 20,
-      current_uoc: 0,
       courses: [],
     },
     {
       year: 2020,
       term: 3,
       max_uoc: 20,
-      current_uoc: 0,
       courses: [],
     },
     {
       year: 2021,
       term: 0,
       max_uoc: 0,
-      current_uoc: 0,
       courses: [],
     },
     {
       year: 2021,
       term: 1,
       max_uoc: 20,
-      current_uoc: 6,
       courses: [],
     },
     {
       year: 2021,
       term: 2,
       max_uoc: 20,
-      current_uoc: 0,
       courses: [],
     },
     {
       year: 2021,
       term: 3,
       max_uoc: 20,
-      current_uoc: 0,
       courses: [],
     },
   ])
@@ -109,13 +99,7 @@ export default function App() {
   // Course selection menu
   const [showSelect, setShowSelect] = useState(false);
   const [selectedCourses, setSelectedCourses] = useState(['COMP1511']);
-  const onDragEnd = () => {
-    return;
-  }
   return (
-  <DragDropContext
-    onDragEnd={onDragEnd}
-  >
     <div className="App" style={themeStyle(themeIndex)}>
       <div className="window">
         <Header nextTheme={nextTheme} />
@@ -142,6 +126,5 @@ export default function App() {
         </div>
       </div>
     </div>
-  </DragDropContext>
   );
 }

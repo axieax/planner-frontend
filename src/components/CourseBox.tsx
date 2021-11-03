@@ -18,7 +18,7 @@ const CourseBox: React.FC<courseBoxProps> = ({
 }) => {
   const [showUnplaced, setShowUnplaced] = useState(true);
   const coursesToShow = !showUnplaced ?  selectedCourses.filter(course => !inPlan(course, plan)) : selectedCourses;
-  
+
   return (
     <div className={styles.courseBox}>
       <div className={styles.strip}>

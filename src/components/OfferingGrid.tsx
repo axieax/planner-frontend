@@ -1,8 +1,7 @@
 import { Offering, PlanType } from "../App";
-import OfferingBox from "./OfferingList";
+import OfferingBox from "./OfferingBox";
 import styles from "./OfferingGrid.module.scss";
 import { Box } from "@mui/system";
-import { useEffect, useState } from "react";
 
 interface OfferingGridProps {
   plan: Array<Offering>;
@@ -15,15 +14,11 @@ interface OfferingGridProps {
 const OfferingGrid: React.FC<OfferingGridProps> = ({
   plan, setPlan, themeIndex, planType
 }) => {
-  const [numDisplayedTerms, setNumDisplayedTerms] = useState(planType.num_terms * (planType.end.year - planType.start.year + 1));
-  useEffect(() => 
-    setNumDisplayedTerms(planType.num_terms * (planType.end.year - planType.start.year + 1))
-  , [planType.num_terms, planType.end.year, planType.start.year]);
+  const numDisplayedTerms = planType.num_terms * (planType.end.year - planType.start.year + 1);
   return (
     <Box 
       sx={{
         gridTemplateColumns: "1fr ".repeat(planType.num_terms),
-        gridTemplateRows: "1fr ".repeat(planType.end.year - planType.start.year + 1),
       }}
       className={styles.offering}
     >

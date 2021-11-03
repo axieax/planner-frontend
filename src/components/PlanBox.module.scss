@@ -1,5 +1,8 @@
 .planBox {
   padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
   .strip {
     display: flex;
     justify-content: space-between;

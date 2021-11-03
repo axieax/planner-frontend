@@ -1,5 +1,5 @@
-import { Input, Paper } from "@mui/material";
-import { Droppable } from "react-beautiful-dnd";
+import { Input, Paper, Button } from "@mui/material";
+import { useState } from "react";
 import { Offering, themeStyle } from "../App";
 
 interface OfferingBoxProps {
@@ -13,9 +13,11 @@ interface OfferingBoxProps {
 const OfferingBox: React.FC<OfferingBoxProps> = ({
   plan, setPlan, themeIndex, planIndex
 }) => {
+  const [showPopover, setShowPopover] = useState(false);
   return (
       <Paper style={themeStyle(themeIndex)}>
         <h3>year {plan[planIndex].year} term {plan[planIndex].term}</h3>
+        max uoc: {plan[planIndex].max_uoc} <br/>
         change uoc:
         <Input
           onChange={(e) => setPlan((prevPlan) => {
@@ -24,7 +26,11 @@ const OfferingBox: React.FC<OfferingBoxProps> = ({
             return plan;
           })}
         /><br/>
-        {JSON.stringify(plan[planIndex].courses)}
+        <Button
+          onChange={() => setShowPopover((prevPopover) => !prevPopover)}
+        >
+          +
+        </Button>
       </Paper>
   );
 }
