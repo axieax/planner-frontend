@@ -7,6 +7,7 @@ interface courseBoxProps {
   selectedCourses: string[];
   setShowSelect: React.Dispatch<React.SetStateAction<boolean>>;
   plan: Array<Offering>;
+  setOfferingTerm: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const inPlan = (course: string, plan: Array<Offering>) => plan.reduce<Array<string>>((prev, curr) => prev.concat(curr.courses), []).includes(course);
@@ -15,6 +16,7 @@ const CourseBox: React.FC<courseBoxProps> = ({
   selectedCourses,
   setShowSelect,
   plan,
+  setOfferingTerm,
 }) => {
   const [showUnplaced, setShowUnplaced] = useState(true);
   const coursesToShow = !showUnplaced ?  selectedCourses.filter(course => !inPlan(course, plan)) : selectedCourses;
@@ -38,7 +40,14 @@ const CourseBox: React.FC<courseBoxProps> = ({
         </ul>
       </div>
       <div className={styles.buttonContainer}>
-        <Button onClick={() => setShowSelect(true)}>Add a course</Button>
+        <Button
+          onClick={() => {
+            setShowSelect(true);
+            setOfferingTerm(NaN);
+          }}
+        >
+          Add a course
+        </Button>
       </div>
     </div>
   );

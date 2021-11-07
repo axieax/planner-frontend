@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./App.scss";
+import styles from "./App.module.scss";
 
 import Header from "./components/Header";
 import PlanBox from "./components/PlanBox";
@@ -99,29 +99,35 @@ export default function App() {
   // Course selection menu
   const [showSelect, setShowSelect] = useState(false);
   const [selectedCourses, setSelectedCourses] = useState(['COMP1511']);
+  const [offeringTerm, setOfferingTerm] = useState(NaN);
   return (
-    <div className="App" style={themeStyle(themeIndex)}>
-      <div className="window">
+    <div className={styles.App} style={themeStyle(themeIndex)}>
+      <div className={styles.window}>
         <Header nextTheme={nextTheme} />
-        <div className="interface">
+        <div className={styles.interface}>
           {showSelect && (
             <CourseSelect
+              setPlan={setPlan}
               setSelectedCourses={setSelectedCourses}
               setShowSelect={setShowSelect}
+              offeringTerm={offeringTerm}
             />
           )}
           <PlanBox
             planType={planType}
             setPlanType={setPlanType}
             selectedCourses={selectedCourses}
+            setShowSelect={setShowSelect}
             plan={plan}
             setPlan={setPlan}
             themeIndex={themeIndex}
+            setOfferingTerm={setOfferingTerm}
             />
           <CourseBox
             selectedCourses={selectedCourses}
             setShowSelect={setShowSelect}
             plan={plan}
+            setOfferingTerm={setOfferingTerm}
           />
         </div>
       </div>

@@ -10,13 +10,15 @@ interface planBoxProps {
   planType: PlanType;
   setPlanType: React.Dispatch<React.SetStateAction<PlanType>>;
   selectedCourses: Array<string>;
+  setShowSelect: React.Dispatch<React.SetStateAction<boolean>>;
   plan: Array<Offering>;
   setPlan: React.Dispatch<React.SetStateAction<Array<Offering>>>;
   themeIndex: number;
+  setOfferingTerm: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const PlanBox: React.FC<planBoxProps> = ({ 
-  planType, setPlanType, selectedCourses, plan, themeIndex, setPlan
+  planType, setPlanType, selectedCourses, setShowSelect, plan, setPlan, themeIndex, setOfferingTerm
 }) => {
     const submitPlan = async () => {
     const requestInit: RequestInit = {
@@ -24,7 +26,7 @@ const PlanBox: React.FC<planBoxProps> = ({
       headers: {
         'Content-type': 'application/json',
       },
-      body: JSON.stringify(plan),
+      body: JSON.stringify({...planType, ...selectedCourses, ...plan}),
     }
     const newPlan = await fetch('http://localhost:6000/plan', requestInit).then((response) => response.json());
     setPlanType(newPlan);
@@ -42,15 +44,15 @@ const PlanBox: React.FC<planBoxProps> = ({
         <OfferingGrid
             plan={plan}
             setPlan={setPlan}
+            setShowSelect={setShowSelect}
+            setOfferingTerm={setOfferingTerm}
             themeIndex={themeIndex}
             planType={planType}
         />
       </div>
       <SettingsBox
-        planType={planType}
         setPlanType={setPlanType}
         themeIndex={themeIndex}
-        plan={plan}
         setPlan={setPlan}
       />
     </div>

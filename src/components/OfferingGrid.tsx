@@ -6,13 +6,15 @@ import { Box } from "@mui/system";
 interface OfferingGridProps {
   plan: Array<Offering>;
   setPlan: React.Dispatch<React.SetStateAction<Array<Offering>>>;
+  setShowSelect: React.Dispatch<React.SetStateAction<boolean>>;
+  setOfferingTerm: React.Dispatch<React.SetStateAction<number>>;
   themeIndex: number;
   planType: PlanType;
 }
 
 
 const OfferingGrid: React.FC<OfferingGridProps> = ({
-  plan, setPlan, themeIndex, planType
+  plan, setPlan, setShowSelect, setOfferingTerm, themeIndex, planType
 }) => {
   const numDisplayedTerms = planType.num_terms * (planType.end.year - planType.start.year + 1);
   return (
@@ -27,6 +29,8 @@ const OfferingGrid: React.FC<OfferingGridProps> = ({
           key={number}
           plan={plan}
           setPlan={setPlan}
+          setShowSelect={setShowSelect}
+          setOfferingTerm={setOfferingTerm}
           planIndex={number}
           themeIndex={themeIndex}
         />))

@@ -1,19 +1,19 @@
 import { Input, Paper, Button } from "@mui/material";
-import { useState } from "react";
 import { Offering, themeStyle } from "../App";
 
 interface OfferingBoxProps {
   plan: Array<Offering>;
   setPlan: React.Dispatch<React.SetStateAction<Array<Offering>>>;
+  setShowSelect: React.Dispatch<React.SetStateAction<boolean>>;
+  setOfferingTerm: React.Dispatch<React.SetStateAction<number>>;
   themeIndex: number;
   planIndex: number;
 }
 
 
 const OfferingBox: React.FC<OfferingBoxProps> = ({
-  plan, setPlan, themeIndex, planIndex
+  plan, setPlan, setShowSelect, setOfferingTerm, themeIndex, planIndex
 }) => {
-  const [showPopover, setShowPopover] = useState(false);
   return (
       <Paper style={themeStyle(themeIndex)}>
         <h3>year {plan[planIndex].year} term {plan[planIndex].term}</h3>
@@ -26,14 +26,18 @@ const OfferingBox: React.FC<OfferingBoxProps> = ({
             return plan;
           })}
         /><br/>
+        {JSON.stringify(plan[planIndex].courses)}
         <Button
-          onChange={() => setShowPopover((prevPopover) => !prevPopover)}
+          sx={{float: "right"}}
+          onClick={() => {
+            setShowSelect(true);
+            setOfferingTerm(planIndex);
+          }}
         >
           +
         </Button>
       </Paper>
   );
 }
-
 
 export default OfferingBox;

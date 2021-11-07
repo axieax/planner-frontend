@@ -1,25 +1,23 @@
 import { Paper, Input } from "@mui/material";
-import { Offering, PlanType, themeStyle, OfferingTerm } from "../App";
+import { Offering, PlanType, themeStyle } from "../App";
 import styles from './SettingsBox.module.scss';
 
 
 interface settingsBoxProps {
-  planType: PlanType;
   setPlanType: React.Dispatch<React.SetStateAction<PlanType>>;
   themeIndex: number;
-  plan: Array<Offering>
   setPlan: React.Dispatch<React.SetStateAction<Array<Offering>>>
 }
 
 
 const SettingsBox: React.FC<settingsBoxProps> = ({
-  planType, setPlanType, themeIndex, plan, setPlan
+  setPlanType, themeIndex, setPlan
 }) => {
   
-  const getTermTuples = (beginning: OfferingTerm, end: OfferingTerm) => {
+  const getTermTuples = (prevPlan: PlanType) => {
     let yearTuples = [];
-    for (let year = beginning.year; year <= end.year; year++) {
-      for (let term = 0; term < planType.num_terms; term++) {
+    for (let year = prevPlan.start.year; year <= prevPlan.end.year; year++) {
+      for (let term = 0; term < prevPlan.num_terms; term++) {
         yearTuples.push([term, year]);
       }
     }
@@ -27,7 +25,7 @@ const SettingsBox: React.FC<settingsBoxProps> = ({
   }
 
   const fixPlan = (prevPlan: PlanType) => {
-    const termTuples = getTermTuples(prevPlan.start, prevPlan.end);
+    const termTuples = getTermTuples(prevPlan);
     setPlan(termTuples.map((item) => ({
         term: item[0],
         year: item[1],
