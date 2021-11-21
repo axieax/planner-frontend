@@ -25,11 +25,12 @@ const PlanBox: React.FC<planBoxProps> = ({
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
+        'Access-Allow-Control-Origin': '*'
       },
       body: JSON.stringify({...planType, ...selectedCourses, ...plan}),
     }
-    const newPlan = await fetch('http://localhost:6000/plan', requestInit).then((response) => response.json());
-    setPlanType(newPlan);
+    const newPlan = await fetch('http://localhost:5000/plan', requestInit).then((response) => response.json());
+    setPlan(newPlan.plan);
   }
   return (
     <div className={styles.planBox}>
