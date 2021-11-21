@@ -1,5 +1,6 @@
 import { Input, Paper, Button } from "@mui/material";
 import { Offering, themeStyle } from "../App";
+import Course from "./Course";
 
 interface OfferingBoxProps {
   plan: Array<Offering>;
@@ -21,12 +22,12 @@ const OfferingBox: React.FC<OfferingBoxProps> = ({
         change uoc:
         <Input
           onChange={(e) => setPlan((prevPlan) => {
-            const plan = prevPlan.concat([]); // copy
+            const plan = [...prevPlan]
             plan[planIndex].max_uoc = parseInt(e.target.value);
             return plan;
           })}
-        /><br/>
-        {JSON.stringify(plan[planIndex].courses)}
+        /><br/><br/>
+        {plan[planIndex].courses.map((course) => (<Course course={course} setPlan={setPlan}/>))}
         <Button
           sx={{float: "right"}}
           onClick={() => {

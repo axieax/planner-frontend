@@ -27,7 +27,7 @@ const CourseSelect: React.FC<courseSelectProps> = ({
       <Input sx={{m: 1}} onChange={(e) => setInput(e.target.value)}/>
 
       <Button variant="contained" onClick={()=> {
-        setSelectedCourses((prevCourses) => prevCourses.concat([input]));
+        setSelectedCourses((prevCourses) => prevCourses.includes(input) ? [...prevCourses] : prevCourses.concat([input]));
         if (!isNaN(offeringTerm)) setPlan((prevPlan) => {
           let plan = JSON.parse(JSON.stringify(prevPlan));
           plan[offeringTerm].courses.push(input);

@@ -127,7 +127,9 @@ export default function App() {
             selectedCourses={selectedCourses}
             setShowSelect={setShowSelect}
             plan={plan}
+            setPlan={setPlan}
             setOfferingTerm={setOfferingTerm}
+            setSelectedCourses={setSelectedCourses}
           />
         </div>
       </div>
